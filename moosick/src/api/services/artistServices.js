@@ -53,8 +53,4 @@ const editArtist = async (key, about) => {
   }
 };
 
-// editArtist(
-//   "artist:7d18e831-7315-5fd2-9e6d-2f2ddf62007a",
-//   "Descrição nova"
-// );
 export { getArtists, addArtist, editArtist };

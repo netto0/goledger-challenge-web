@@ -46,23 +46,19 @@ const addAlbum = async (title, artistKey, release, rating) => {
 };
 
 const editAlbum = async (key, release, rating) => {
-    try {
-      const response = await axios.post(`${baseUrl}/invoke/updateAsset`, {
-        update: {
-          "@assetType": "album",
-          "@key": key,
-          title: title,
-          artist: artist,
-          releaseDate: release,
-          rating: rating
-        },
-      });
-      console.log("SUCCESS");
-    } catch (error) {
-      console.log(error.response.status);
-    }
-  };
+  try {
+    const response = await axios.put(`${baseUrl}/invoke/updateAsset`, {
+      update: {
+        "@assetType": "album",
+        "@key": key,
+        releaseDate: release,
+        rating: rating,
+      },
+    });
+    console.log("SUCCESS");
+  } catch (error) {
+    console.log(`ERRO: ${error}`);
+  }
+};
 
-
-editAlbum("album:0cf1210d-94b2-5b19-ac09-f0368d768bc4","Ventura Alterado", "Artistas Alterados","1111-11-11T03:00:00Z",1)
 export { getAlbums, addAlbum, editAlbum };

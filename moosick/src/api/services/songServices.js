@@ -67,4 +67,22 @@ const addSong = async (title, albumKey, artistsArray, explicit) => {
   }
 };
 
-export { getAllSongs, getSongsByArtist, addSong };
+const editSong = async (key, albumKey, explicit) => {
+  try {
+    const response = await axios.put(`${baseUrl}/invoke/updateAsset`, {
+      update: {
+        "@assetType": "song",
+        "@key": key,
+        album: {
+          "@key": albumKey,
+        },
+        explicit: explicit,
+      },
+    });
+    console.log("SUCCESS");
+  } catch (error) {
+    console.log(`ERRO: ${error}`);
+  }
+};
+
+export { getAllSongs, getSongsByArtist, addSong, editSong };
