@@ -1,0 +1,29 @@
+.artistPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listTitle {
+  display: flex;
+}
+
+ul {
+  width: 100%;
+  background-color: aqua;
+}
+
+.artistListItem {
+  width: 50%;
+  background-color: bisque;
+  float: left;
+  display: inline;
+  line-height: 1.5em;
+  border-bottom: 1px solid #ccc;
+}
+
+.artistListItem p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

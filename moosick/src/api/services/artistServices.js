@@ -14,7 +14,7 @@ const getArtists = async () => {
         about: artist.about,
       });
     });
-    console.log(artistsList);
+    // console.log(artistsList);
     return artistsList;
   } catch (error) {
     console.log(`ERROR: ${error}`);

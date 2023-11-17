@@ -16,7 +16,6 @@ const getAllSongs = async () => {
         explicit: song.explicit,
       });
     });
-    console.log(songsList);
     return songsList;
   } catch (error) {
     console.log(`ERROR: ${error}`);

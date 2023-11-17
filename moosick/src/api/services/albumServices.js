@@ -16,7 +16,6 @@ const getAlbums = async () => {
         rating: album.rating,
       });
     });
-    console.log(albumsList);
     return albumsList;
   } catch (error) {
     console.log(`ERROR: ${error}`);
