@@ -1,19 +1,11 @@
-import { getItensByType } from "../axios.js";
+import { getItensByType, getItensResolved } from "../axios.js";
 import axios from "axios";
 import { baseUrl } from "../axios.js";
 
-const getAllPlaylists = async () => {
-  const response = await getItensByType("playlist");
-  const playlistArray = [];
-  response.forEach((playlist) => {
-    playlistArray.push({
-      key: playlist["@key"],
-      name: playlist.name,
-      description: playlist.description,
-      songs: playlist.songs,
-    });
-  });
-  return playlistArray;
+const getPlaylistsService = async () => {
+  const response = await getItensResolved("playlist");
+  console.log(response)
+  return response;
 };
 
 const addPlaylist = async (name, description, songsArray) => {
@@ -50,4 +42,6 @@ const editPlaylist = async (key, description, songsArray) => {
   }
 };
 
-export { getAllPlaylists, addPlaylist, editPlaylist };
+
+getPlaylistsService()
+export { getPlaylistsService, addPlaylist, editPlaylist };

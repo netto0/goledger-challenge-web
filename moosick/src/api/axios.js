@@ -10,6 +10,20 @@ const getItensByType = async (type) => {
       },
     },
   });
+  console.log(response.data.result);
+  return response.data.result;
+};
+
+const getItensResolved = async (type) => {
+  const response = await axios.post(`${baseUrl}/query/search`, {
+    query: {
+      selector: {
+        "@assetType": type,
+      },
+    },
+    resolve: true,
+  });
+  console.log(response.data.result);
   return response.data.result;
 };
 
@@ -27,4 +41,6 @@ const deleteItem = async (type, key) => {
   }
 };
 
-export { baseUrl, getItensByType, deleteItem };
+getItensByType("album");
+
+export { baseUrl, getItensByType, deleteItem, getItensResolved };

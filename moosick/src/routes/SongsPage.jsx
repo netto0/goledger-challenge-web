@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SongsPage.module.css"
-
-import { GlobalSettingsContext } from "../providers/globalSettings";
+import { getSongsService } from "../api/services/songServices";
 
 export default function SongsPage() {
-  const { songs } = React.useContext(GlobalSettingsContext);
+  const [songs, setSongs] = useState([]);
+
+  const getSongs = async () => {
+    const response = await getSongsService();
+    setSongs(response);
+  };
+  
+  useEffect(() => {
+    getSongs()
+  },[]);
 
   return (
     <div className={styles.songsPageContainer}>
@@ -14,6 +22,7 @@ export default function SongsPage() {
       </div>
       <ul>
         {songs.map((song, index) => {
+
           return (
             <li className={styles.songListItem} key={index}>
               <div>
@@ -22,15 +31,15 @@ export default function SongsPage() {
               </div>
               <div>
                 <span>ARTISTS</span>
-                <h1>{JSON.stringify(song.artists)}</h1>
+                <h1>{song.artists[0].name}</h1>
               </div>
               <div>
                 <span>ALBUM</span>
-                <h1>{song.albumKey}</h1>
+                <h1>{song.album.title}</h1>
               </div>
               <div>
                 <span>EXPLICIT</span>
-                <h1>{song.explicit}</h1>
+                <h1>{song.explicit ? "TRUE" : "FALSE"}</h1>
               </div>
               <button>X</button>
             </li>

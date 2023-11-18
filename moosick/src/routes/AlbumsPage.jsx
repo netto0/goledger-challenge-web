@@ -1,19 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./AlbumsPage.module.css";
-import { GlobalSettingsContext } from "../providers/globalSettings";
+import { getAlbumsService } from "../api/services/albumServices";
+import { getArtistsService } from "../api/services/artistServices";
 
 export default function AlbumsPage() {
-  const { artists, albums } = React.useContext(GlobalSettingsContext);
+  const [albums, setAlbums] = useState([]);
+  const [artists, setArtists] = useState([]);
+
+
+  const getAlbums = async () => {
+    const response = await getAlbumsService();
+    setAlbums(response);
+  };
+
+  const getArtists = async () => {
+    const response = await getArtistsService()
+    setArtists(response)
+  }  
+  
+  useEffect(() => {
+    getArtists()
+    getAlbums();
+  },[]);
 
   return (
     <div className={styles.artistPageContainer}>
       <div className={styles.listTitle}>
-        {JSON.stringify(artists)}
+        {JSON.stringify(albums[0])}
         <h1>albums</h1>
         <button>+</button>
       </div>
       <ul>
         {albums.map((album, index) => {
+          
           return (
             <li className={styles.albumListItem} key={index}>
               <div>
@@ -22,7 +41,7 @@ export default function AlbumsPage() {
               </div>
               <div>
                 <span>ARTIST</span>
-                <h1>{album.artistKey}</h1>
+                <h1>{album.artist.name}</h1>
               </div>
               <div>
                 <span>RELEASE</span>

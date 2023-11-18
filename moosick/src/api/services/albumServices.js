@@ -1,22 +1,12 @@
-import { getItensByType } from "../axios.js";
+import { getItensByType, getItensResolved } from "../axios.js";
 import axios from "axios";
 import { baseUrl } from "../axios.js";
 
-const getAlbums = async () => {
+const getAlbumsService = async () => {
   try {
-    const response = await getItensByType("album");
-    const albumsList = [];
-    response.forEach((album) => {
-      albumsList.push({
-        type: album["@assetType"],
-        key: album["@key"],
-        title: album.title,
-        artistKey: album.artist["@key"],
-        release: album.releaseDate,
-        rating: album.rating,
-      });
-    });
-    return albumsList;
+    const response = await getItensResolved("album");
+    console.log(response)
+    return response;
   } catch (error) {
     console.log(`ERROR: ${error}`);
   }
@@ -60,4 +50,5 @@ const editAlbum = async (key, release, rating) => {
   }
 };
 
-export { getAlbums, addAlbum, editAlbum };
+getAlbumsService()
+export { getAlbumsService, addAlbum, editAlbum };

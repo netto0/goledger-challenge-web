@@ -1,22 +1,20 @@
 import axios from "axios";
-import { getItensByType } from "../axios.js";
+import { getItensByType, getItensResolved } from "../axios.js";
 import { baseUrl } from "../axios.js";
 
-const getAllSongs = async () => {
+// const getSongsService = async () => {
+//   try {
+//     const response = await getItensByType("song");
+//     return response;
+//   } catch (error) {
+//     console.log(`ERROR: ${error}`);
+//   }
+// };
+
+const getSongsService = async () => {
   try {
-    const response = await getItensByType("song");
-    const songsList = [];
-    response.forEach((song) => {
-      songsList.push({
-        type: song["@assetType"],
-        key: song["@key"],
-        title: song.title,
-        artists: song.artists,
-        albumKey: song.album["@key"],
-        explicit: song.explicit,
-      });
-    });
-    return songsList;
+    const response = await getItensResolved("song");
+    return response;
   } catch (error) {
     console.log(`ERROR: ${error}`);
   }
@@ -84,4 +82,4 @@ const editSong = async (key, albumKey, explicit) => {
   }
 };
 
-export { getAllSongs, getSongsByArtist, addSong, editSong };
+export { getSongsService, getSongsByArtist, addSong, editSong };

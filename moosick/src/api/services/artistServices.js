@@ -2,24 +2,31 @@ import { getItensByType } from "../axios.js";
 import axios from "axios";
 import { baseUrl } from "../axios.js";
 
-const getArtists = async () => {
+const getArtistsService = async () => {
   try {
     const response = await getItensByType("artist");
-    const artistsList = [];
-    response.forEach((artist) => {
-      artistsList.push({
-        type: artist["@assetType"],
-        key: artist["@key"],
-        name: artist.name,
-        about: artist.about,
-      });
-    });
-    // console.log(artistsList);
-    return artistsList;
+    return response;
   } catch (error) {
     console.log(`ERROR: ${error}`);
   }
 };
+
+const getArtistName = async (key) => {
+  try {
+    const response = await axios.post(`${baseUrl}/query/search`, {
+      "query": {
+        "selector": {
+          "@assetType": "artist",
+          "@key": key
+        }
+      }
+    })
+    console.log(response.data.result[0].name)
+    return response.data.result[0].name
+  } catch (error) {
+    console.log(`ERROR: ${error}`)
+  }
+}
 
 const addArtist = async (name, about) => {
   try {
@@ -53,4 +60,6 @@ const editArtist = async (key, about) => {
   }
 };
 
-export { getArtists, addArtist, editArtist };
+// getArtists()
+
+export { getArtistsService, getArtistName, addArtist, editArtist };
