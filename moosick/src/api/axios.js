@@ -10,7 +10,6 @@ const getItensByType = async (type) => {
       },
     },
   });
-  console.log(response.data.result);
   return response.data.result;
 };
 
@@ -23,7 +22,6 @@ const getItensResolved = async (type) => {
     },
     resolve: true,
   });
-  console.log(response.data.result);
   return response.data.result;
 };
 
@@ -35,7 +33,6 @@ const deleteItem = async (type, key) => {
         "@key": key,
       },
     });
-    console.log("SUCCESS");
   } catch (error) {
     console.log(error);
   }

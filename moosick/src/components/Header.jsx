@@ -2,11 +2,17 @@ import React from "react";
 import styles from "./Header.module.css";
 import { NavLink } from "react-router-dom";
 
+import background from "../assets/img/backgroundClear.jpg";
+import Logo from "./Logo";
+
 export default function Header() {
   return (
-    <header className={styles.headerContainer}>
-      <NavLink className={styles.logoText} to="/" exact="true">
-        <h1 >mooSick!</h1>
+    <header
+      className={styles.headerContainer}
+      style={{ backgroundImage: `url(${background})` }}
+    >
+      <NavLink className={styles.logoField} to="/" exact="true">
+        <Logo />
       </NavLink>
       <div className={styles.menuList}>
         <NavLink
@@ -18,7 +24,7 @@ export default function Header() {
           }}
           to="/artists"
         >
-          artists
+          <span>artists</span>
         </NavLink>
         <NavLink
           style={({ isActive, isPending }) => {
@@ -29,7 +35,7 @@ export default function Header() {
           }}
           to="/albums"
         >
-          albums
+          <span>albums</span>
         </NavLink>
         <NavLink
           style={({ isActive, isPending }) => {
@@ -40,7 +46,7 @@ export default function Header() {
           }}
           to="/songs"
         >
-          songs
+          <span>songs</span>
         </NavLink>
         <NavLink
           style={({ isActive, isPending }) => {
@@ -51,7 +57,7 @@ export default function Header() {
           }}
           to="/playlists"
         >
-          playlists
+          <span>playlists</span>
         </NavLink>
       </div>
     </header>

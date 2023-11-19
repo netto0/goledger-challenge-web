@@ -4,7 +4,6 @@ import { baseUrl } from "../axios.js";
 
 const getPlaylistsService = async () => {
   const response = await getItensResolved("playlist");
-  console.log(response)
   return response;
 };
 
@@ -20,7 +19,6 @@ const addPlaylist = async (name, description, songsArray) => {
         },
       ],
     });
-    console.log("SUCCESS");
   } catch (error) {
     console.log(error);
   }
@@ -36,7 +34,6 @@ const editPlaylist = async (key, description, songsArray) => {
         songs: songsArray,
       },
     });
-    console.log("SUCCESS");
   } catch (error) {
     console.log(`ERRO: ${error}`);
   }

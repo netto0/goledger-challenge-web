@@ -1,0 +1,75 @@
+.artistCard {
+    background-color: var(--gray0);
+    border-radius: var(--defaultBorderRadius);
+    box-shadow: var(--defaultShadow);
+    
+    height: 92px;
+    position: relative;
+    float: left;
+    display: flex;
+    color: var(--darkGray);
+    padding: 3px 10px;
+}
+
+.artistCard:hover {
+    cursor: pointer;
+}
+
+.infoField {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.infoField h1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.infoField:nth-child(1) {
+  width: 40%;
+}
+
+.infoField:nth-child(2) {
+  width: 30%;
+}
+.infoField:nth-child(3) {
+  width: 20%;
+}
+.infoField:nth-child(4) {
+  width: 10%;
+}
+
+
+.artistCard h1 {
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.artistCard button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 3px;
+  right: 3px;
+
+  color: var(--darkGray);
+  background-color: var(--orange);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 40px;
+
+  border: none;
+}
+
+.artistCard button:hover {
+  cursor: pointer;
+}

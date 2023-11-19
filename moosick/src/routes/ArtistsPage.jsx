@@ -1,36 +1,32 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ArtistsPage.module.css";
 import { getArtistsService } from "../api/services/artistServices";
+import ListTitle from "../components/ListTitle";
+import ArtistCard from "../components/ArtistCard";
 
 export default function ArtistsPage() {
-  const [artists, setArtists] = useState([])
+  const [artists, setArtists] = useState([]);
 
   const getArtists = async () => {
-    const response = await getArtistsService()
-    setArtists(response)
-  }
+    const response = await getArtistsService();
+    setArtists(response);
+  };
 
   useEffect(() => {
-    getArtists()
-  },[])
+    getArtists();
+  }, []);
 
   return (
     <div className={styles.artistPageContainer}>
-      <div className={styles.listTitle}>
-        {/* {JSON.stringify(artists)} */}
-        <h1>artists</h1>
-        <button>+</button>
-      </div>
-      <ul>
+      <ListTitle title="artists" />
+      <ul className={styles.artistUl}>
         {artists.map((artist, index) => {
           return (
-            <li className={styles.artistListItem} key={index}>
-              <div>
-                <h1>{artist.name}</h1>
-                <p>{artist.about}</p>
-              </div>
-              <button>X</button>
-            </li>
+            <ArtistCard
+              artistKey={artist["@key"]}
+              name={artist.name}
+              about={artist.about}
+            />
           );
         })}
       </ul>

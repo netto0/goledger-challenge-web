@@ -1,0 +1,14 @@
+.logoText {
+  color: var(--darkGray);
+  font-family: "Boogaloo", sans-serif;
+  font-size: 40px;
+}
+
+.logoText h1,
+span {
+    font-family: "Boogaloo", sans-serif;
+}
+
+.logoText span {
+  color: var(--orange);
+}

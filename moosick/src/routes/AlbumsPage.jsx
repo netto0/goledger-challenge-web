@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./AlbumsPage.module.css";
 import { getAlbumsService } from "../api/services/albumServices";
 import { getArtistsService } from "../api/services/artistServices";
+import ListTitle from "../components/ListTitle";
+import AlbumCard from "../components/AlbumCard";
+import moment from 'moment'
 
 export default function AlbumsPage() {
   const [albums, setAlbums] = useState([]);
   const [artists, setArtists] = useState([]);
-
 
   const getAlbums = async () => {
     const response = await getAlbumsService();
@@ -14,45 +16,27 @@ export default function AlbumsPage() {
   };
 
   const getArtists = async () => {
-    const response = await getArtistsService()
-    setArtists(response)
-  }  
-  
+    const response = await getArtistsService();
+    setArtists(response);
+  };
+
   useEffect(() => {
-    getArtists()
+    getArtists();
     getAlbums();
-  },[]);
+  }, []);
 
   return (
     <div className={styles.artistPageContainer}>
-      <div className={styles.listTitle}>
-        {JSON.stringify(albums[0])}
-        <h1>albums</h1>
-        <button>+</button>
-      </div>
+      <ListTitle title="albums" />
       <ul>
         {albums.map((album, index) => {
-          
           return (
-            <li className={styles.albumListItem} key={index}>
-              <div>
-                <span>TITLE</span>
-                <h1>{album.title}</h1>
-              </div>
-              <div>
-                <span>ARTIST</span>
-                <h1>{album.artist.name}</h1>
-              </div>
-              <div>
-                <span>RELEASE</span>
-                <h1>{album.release}</h1>
-              </div>
-              <div>
-                <span>RATING</span>
-                <h1>{album.rating}</h1>
-              </div>
-              <button>X</button>
-            </li>
+            <AlbumCard
+              title={album.title}
+              artist={album.artist.name}
+              release={moment(album.releaseDate).format("MM/DD/YYYY")}
+              rating={album.rating}
+            />
           );
         })}
       </ul>

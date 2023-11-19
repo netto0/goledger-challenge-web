@@ -5,7 +5,6 @@ import { baseUrl } from "../axios.js";
 const getAlbumsService = async () => {
   try {
     const response = await getItensResolved("album");
-    console.log(response)
     return response;
   } catch (error) {
     console.log(`ERROR: ${error}`);
@@ -28,7 +27,6 @@ const addAlbum = async (title, artistKey, release, rating) => {
         },
       ],
     });
-    console.log("SUCCESS");
   } catch (error) {
     console.log(error);
   }
@@ -44,7 +42,6 @@ const editAlbum = async (key, release, rating) => {
         rating: rating,
       },
     });
-    console.log("SUCCESS");
   } catch (error) {
     console.log(`ERRO: ${error}`);
   }

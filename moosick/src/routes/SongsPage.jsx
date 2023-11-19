@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import styles from "./SongsPage.module.css"
+import styles from "./SongsPage.module.css";
 import { getSongsService } from "../api/services/songServices";
+import ListTitle from "../components/ListTitle";
+import SongCard from "../components/SongCard";
 
 export default function SongsPage() {
   const [songs, setSongs] = useState([]);
@@ -9,40 +11,26 @@ export default function SongsPage() {
     const response = await getSongsService();
     setSongs(response);
   };
-  
+
   useEffect(() => {
-    getSongs()
-  },[]);
+    getSongs();
+  }, []);
 
   return (
     <div className={styles.songsPageContainer}>
-      <div className={styles.listTitle}>
-        <h1>songs</h1>
-        <button>+</button>
-      </div>
+      <ListTitle title="songs" />
       <ul>
         {songs.map((song, index) => {
+          const artistNames = []
+          song.artists.map(artist => artistNames.push(artist.name))
 
           return (
-            <li className={styles.songListItem} key={index}>
-              <div>
-                <span>TITLE</span>
-                <h1>{song.title}</h1>
-              </div>
-              <div>
-                <span>ARTISTS</span>
-                <h1>{song.artists[0].name}</h1>
-              </div>
-              <div>
-                <span>ALBUM</span>
-                <h1>{song.album.title}</h1>
-              </div>
-              <div>
-                <span>EXPLICIT</span>
-                <h1>{song.explicit ? "TRUE" : "FALSE"}</h1>
-              </div>
-              <button>X</button>
-            </li>
+            <SongCard
+              title={song.title}
+              artists={artistNames.join(', ')}
+              album={song.album.title}
+              explicit={song.explicit}
+            />
           );
         })}
       </ul>
