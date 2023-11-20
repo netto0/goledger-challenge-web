@@ -19,13 +19,13 @@ const addPlaylistService = async (name, description, songsArray) => {
         },
       ],
     });
-    return "SUCCESS"
+    return "SUCCESS";
   } catch (error) {
-    return error.response.data
+    return error.response.data;
   }
 };
 
-const editPlaylist = async (key, description, songsArray) => {
+const editPlaylistService = async (key, description, songsArray) => {
   try {
     const response = await axios.put(`${baseUrl}/invoke/updateAsset`, {
       update: {
@@ -35,9 +35,10 @@ const editPlaylist = async (key, description, songsArray) => {
         songs: songsArray,
       },
     });
+    return "SUCCESS";
   } catch (error) {
-    console.log(`ERRO: ${error}`);
+    return error.response.data;
   }
 };
 
-export { getPlaylistsService, addPlaylistService, editPlaylist };
+export { getPlaylistsService, addPlaylistService, editPlaylistService };

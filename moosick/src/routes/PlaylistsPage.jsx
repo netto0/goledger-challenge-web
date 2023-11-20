@@ -35,7 +35,7 @@ export default function PlaylistsPage() {
                   playlistKey={playlist['@key']}
                   name={playlist.name}
                   description={playlist.description}
-                  songs={songsNames}
+                  plSongs={songsNames}
                 />
               </li>
             );

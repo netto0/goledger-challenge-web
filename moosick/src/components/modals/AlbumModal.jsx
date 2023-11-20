@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import { addAlbumService, editAlbumService } from "../../api/services/albumServices";
+import Select from "react-select";
 
 export default function AlbumModal({ albumKey, albumInfos }) {
   const { closeModal, getArtists, artists, getAlbums } = React.useContext(
@@ -28,7 +29,7 @@ export default function AlbumModal({ albumKey, albumInfos }) {
       );
       closeModal();
       if (response == "SUCCESS") {
-        toast.success("Artist added successfully!", {
+        toast.success("Album added successfully!", {
           position: "top-center",
           autoClose: 2500,
           hideProgressBar: false,
@@ -57,7 +58,7 @@ export default function AlbumModal({ albumKey, albumInfos }) {
       const response = await editAlbumService(albumKey, moment(release).format(), rating);
       closeModal();
       if (response == "SUCCESS") {
-        toast.success("Artist edited successfully!", {
+        toast.success("Album edited successfully!", {
           position: "top-center",
           autoClose: 2500,
           hideProgressBar: false,
@@ -124,6 +125,7 @@ export default function AlbumModal({ albumKey, albumInfos }) {
             Artist
           </label>
           {!albumInfos ? (
+            
             <select
               className={styles.formSelect}
               name="artist"

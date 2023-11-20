@@ -13,7 +13,9 @@
 }
 
 .artistCard:hover {
-    cursor: pointer;
+  cursor: pointer;
+  scale: 1.01;
+  transition: .2s;
 }
 
 .infoField {

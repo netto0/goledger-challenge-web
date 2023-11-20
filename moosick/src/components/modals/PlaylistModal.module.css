@@ -42,6 +42,10 @@
   cursor: pointer;
 }
 
+.multiSelect {
+    margin-bottom: 1rem;
+}
+
 .modalContent {
     width: 100%;
     padding: 0px 15px;

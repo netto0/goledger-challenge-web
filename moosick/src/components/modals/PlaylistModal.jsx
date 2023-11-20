@@ -7,10 +7,9 @@ import Select from "react-select";
 import "react-toastify/dist/ReactToastify.css";
 
 import {
-  addSongService,
-  editSongService,
-} from "../../api/services/songServices";
-import { addPlaylistService } from "../../api/services/playlistServices";
+  addPlaylistService,
+  editPlaylistService,
+} from "../../api/services/playlistServices";
 
 export default function PlaylistModal({ playlistKey, playlistInfos }) {
   const {
@@ -21,27 +20,30 @@ export default function PlaylistModal({ playlistKey, playlistInfos }) {
     albums,
     getSongs,
     songs,
-    getPlaylists
+    getPlaylists,
   } = React.useContext(GlobalSettingsContext);
   const [name, setName] = useState("");
-  const [playlistSongs, setPlaylistSongs] = useState(null);
+  const [playlistSongs, setPlaylistSongs] = useState([]);
   const [description, setDescription] = useState("");
 
   const formatedSongs = [];
-  playlistSongs?.map((song) => {
+  
+ 
+
+  const handleChange = (selectedOption) => {
+    setPlaylistSongs(selectedOption);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+ playlistSongs?.map((song) => {
     formatedSongs.push({
       "@assetType": "song",
       "@key": song.value,
     });
   });
 
-  const handleChange = (selectedOption) => {
-    setPlaylistSongs(selectedOption);
-    console.log(`Option selected:`, selectedOption);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
     if (!playlistInfos) {
       const response = await addPlaylistService(
         name,
@@ -74,36 +76,39 @@ export default function PlaylistModal({ playlistKey, playlistInfos }) {
           theme: "light",
         });
       }
-    } 
-    // else {
-    //   const response = await editSongService(songKey, album, explicit);
-    //   closeModal();
-    //   if (response == "SUCCESS") {
-    //     toast.success("Song edited successfully!", {
-    //       position: "top-center",
-    //       autoClose: 2500,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: false,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //     getSongs();
-    //   } else {
-    //     console.log(response);
-    //     toast.error(response, {
-    //       position: "top-center",
-    //       autoClose: 2500,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: false,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //   }
-    // }
+    } else {
+      const response = await editPlaylistService(
+        playlistKey,
+        description,
+        formatedSongs
+      );
+      closeModal();
+      if (response == "SUCCESS") {
+        toast.success("Playlist edited successfully!", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        getPlaylists();
+      } else {
+        console.log(response);
+        toast.error(response, {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    }
   };
 
   useEffect(() => {
@@ -112,8 +117,7 @@ export default function PlaylistModal({ playlistKey, playlistInfos }) {
     getSongs();
     if (playlistInfos) {
       setName(playlistInfos[0]);
-      setPlaylistSongs(playlistInfos[1]);
-      setDescription(playlistInfos[2]);
+      setDescription(playlistInfos[1]);
     }
   }, []);
 
@@ -152,39 +156,15 @@ export default function PlaylistModal({ playlistKey, playlistInfos }) {
           <label className={styles.formLabel} htmlFor="">
             Songs
           </label>
-          {!playlistInfos ? (
-            // <Select options={songsOptions} />
-            <Select
-              defaultValue={[songsOptions[0]]}
-              isMulti
-              name="playlistSongs"
-              options={songsOptions}
-              className={styles.multiSelect}
-              classNamePrefix="select"
-              onChange={handleChange}
-            />
-          ) : (
-            // <select
-            //   className={styles.formSelect}
-            //   name="song"
-            //   onChange={(e) => setPlaylistSongs(e.target.value)}
-            // >
-            //   {songsOptions.map((song) => {
-            //     return (
-            //       <option value={song.key} key={song.key}>
-            //         {song.title}
-            //       </option>
-            //     );
-            //   })}
-            // </select>
-            <input
-              className={styles.formInput}
-              type="text"
-              value={playlistSongs}
-              onChange={null}
-              readOnly={playlistInfos}
-            />
-          )}
+
+          <Select
+            isMulti
+            name="playlistSongs"
+            options={songsOptions}
+            className={styles.multiSelect}
+            classNamePrefix="select"
+            onChange={handleChange}
+          />
 
           <label className={styles.formLabel} htmlFor="">
             Description
@@ -194,7 +174,6 @@ export default function PlaylistModal({ playlistKey, playlistInfos }) {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter the playlist description..."
-            readOnly={playlistInfos}
           />
           <button className={styles.confirmButton} onClick={handleSubmit}>
             Confirm

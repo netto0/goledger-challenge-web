@@ -5,7 +5,7 @@ import Logo from "../components/Logo";
 export default function HomePage() {
     return (
         <div className={styles.homePageContainer}>
-            <h1>YOUR FAVORITE PLACE TO LISTEN TO MUSIC</h1>
+            <h1>YOUR FAVORITE PLACE TO LISTEN TO <strong>MUSIC</strong></h1>
             <Logo />
         </div>
     )

@@ -5,7 +5,10 @@ import { GlobalSettingsContext } from "../../providers/globalSettings";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { addSongService, editSongService } from "../../api/services/songServices";
+import {
+  addSongService,
+  editSongService,
+} from "../../api/services/songServices";
 
 export default function SongModal({ songKey, songInfos }) {
   const { closeModal, getArtists, getAlbums, artists, albums, getSongs } =
@@ -18,8 +21,9 @@ export default function SongModal({ songKey, songInfos }) {
   var formatedArtists = [
     {
       "@assetType": "artist",
-      "@key": songArtists
-    }]
+      "@key": songArtists,
+    },
+  ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,7 +76,7 @@ export default function SongModal({ songKey, songInfos }) {
         });
         getSongs();
       } else {
-        console.log(response)
+        console.log(response);
         toast.error(response, {
           position: "top-center",
           autoClose: 2500,
@@ -86,7 +90,6 @@ export default function SongModal({ songKey, songInfos }) {
       }
     }
   };
-
 
   useEffect(() => {
     getArtists();
@@ -110,7 +113,6 @@ export default function SongModal({ songKey, songInfos }) {
   });
 
   return (
-    
     <div className={styles.modalContainer}>
       <div className={styles.modalContent}>
         <button className={styles.closeButton} onClick={closeModal}>
@@ -168,7 +170,7 @@ export default function SongModal({ songKey, songInfos }) {
           >
             {albumsOptions.map((album) => {
               return (
-                <option defvalue={album.key} key={album.key}>
+                <option value={album.key} key={album.key}>
                   {album.title}
                 </option>
               );
@@ -178,13 +180,11 @@ export default function SongModal({ songKey, songInfos }) {
             <input
               type="checkbox"
               id="explicitCheck"
-              // value={explicit}
               onChange={(e) => setExplicit(!explicit)}
             />
             <label htmlFor="explicitCheck">Explicit</label>
           </div>
-          {/* <button className={styles.confirmButton}> */}
-            <button className={styles.confirmButton} onClick={handleSubmit}>
+          <button className={styles.confirmButton} onClick={handleSubmit}>
             Confirm
           </button>
         </form>
