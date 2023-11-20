@@ -1,28 +1,25 @@
-# GoLedger Challenge
+# GoLedger Front-end Challenge
 
-In this challenge you will create a web interface to a blockchain application. In this application you must implement a streming service-like interface, with artist, album, song and playlist registration.
+In this project i made a website to apply de "CRUD" concept with Artists, Songs, Albums and PlayLists.
 
-# Requirements
+---
 
-- Your application should be able to add/remove/edit and show all artists, albums, songs and playlists;
-- Use **React** (all UI libraries are allowed);
+## Libs used
 
-## Instructions
+- Moment
+- React Icons
+- React Toastify
+- React Select
 
-- Fork the repository [https://github.com/goledgerdev/goledger-challenge-web](https://github.com/goledgerdev/goledger-challenge-web)
-    - Fork it, do **NOT** clone it, since you will need to send us your forked repository
-    - If you **cannot** fork it, create a private repository and give access to `samuelvenzi` and `andremacedopv`.
-- Create an web application using React. You will implement the basic operations provided by the API, which are `Create`, `Update`, `Delete` and `Search`.
-- Improve your application with a beautiful UI.
+---
 
-## Server
+## Setup
 
-The data are obtained using a rest server at this address: `http://ec2-54-87-223-191.compute-1.amazonaws.com`
+1: Clone this repo to your desktop
+2: Access the folder with `cd moosick` 
+3: Run `npm install`
+4: Run `npm run dev` to run the project with localHost `http://localhost:5173`
 
-Also, a Swagger with the endpoints specifications for the operations is provided at this address: `http://ec2-54-87-223-191.compute-1.amazonaws.com/api-docs/`.
-
-Tip: execute each operation in the Swagger for information on payload format and endpoint addresses.
-
-## Complete the challenge
-
-To complete the challenge, you must send us the link to your forked repository with the code of your application. Please, provide instructions to execute the code.
+---
+## Pages Designs
+[Click here to see my Figma Project](https://www.figma.com/file/U3wYywomL1DGR7aMKnBwE1/mooSick!?type=design&node-id=0%3A1&mode=design&t=pS1mU2AOBHUdCgW3-1)
