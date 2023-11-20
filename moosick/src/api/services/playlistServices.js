@@ -7,7 +7,7 @@ const getPlaylistsService = async () => {
   return response;
 };
 
-const addPlaylist = async (name, description, songsArray) => {
+const addPlaylistService = async (name, description, songsArray) => {
   try {
     const response = await axios.post(`${baseUrl}/invoke/createAsset`, {
       asset: [
@@ -19,8 +19,9 @@ const addPlaylist = async (name, description, songsArray) => {
         },
       ],
     });
+    return "SUCCESS"
   } catch (error) {
-    console.log(error);
+    return error.response.data
   }
 };
 
@@ -39,6 +40,4 @@ const editPlaylist = async (key, description, songsArray) => {
   }
 };
 
-
-getPlaylistsService()
-export { getPlaylistsService, addPlaylist, editPlaylist };
+export { getPlaylistsService, addPlaylistService, editPlaylist };

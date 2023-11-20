@@ -11,7 +11,7 @@ const getAlbumsService = async () => {
   }
 };
 
-const addAlbum = async (title, artistKey, release, rating) => {
+const addAlbumService = async (title, artistKey, release, rating) => {
   try {
     const response = await axios.post(`${baseUrl}/invoke/createAsset`, {
       asset: [
@@ -27,12 +27,13 @@ const addAlbum = async (title, artistKey, release, rating) => {
         },
       ],
     });
+    return "SUCCESS";
   } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 };
 
-const editAlbum = async (key, release, rating) => {
+const editAlbumService = async (key, release, rating) => {
   try {
     const response = await axios.put(`${baseUrl}/invoke/updateAsset`, {
       update: {
@@ -42,10 +43,10 @@ const editAlbum = async (key, release, rating) => {
         rating: rating,
       },
     });
+    return "SUCCESS";
   } catch (error) {
-    console.log(`ERRO: ${error}`);
+    return error.response.data;
   }
 };
 
-getAlbumsService()
-export { getAlbumsService, addAlbum, editAlbum };
+export { getAlbumsService, addAlbumService, editAlbumService };

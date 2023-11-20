@@ -2,15 +2,6 @@ import axios from "axios";
 import { getItensByType, getItensResolved } from "../axios.js";
 import { baseUrl } from "../axios.js";
 
-// const getSongsService = async () => {
-//   try {
-//     const response = await getItensByType("song");
-//     return response;
-//   } catch (error) {
-//     console.log(`ERROR: ${error}`);
-//   }
-// };
-
 const getSongsService = async () => {
   try {
     const response = await getItensResolved("song");
@@ -42,7 +33,7 @@ const getSongsByArtist = async (key) => {
   }
 };
 
-const addSong = async (title, albumKey, artistsArray, explicit) => {
+const addSongService = async (title, albumKey, artistsArray, explicit) => {
   try {
     const response = await axios.post(`${baseUrl}/invoke/createAsset`, {
       asset: [
@@ -58,13 +49,13 @@ const addSong = async (title, albumKey, artistsArray, explicit) => {
         },
       ],
     });
-    console.log("SUCCESS");
+    return "SUCCESS";
   } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 };
 
-const editSong = async (key, albumKey, explicit) => {
+const editSongService = async (key, albumKey, explicit) => {
   try {
     const response = await axios.put(`${baseUrl}/invoke/updateAsset`, {
       update: {
@@ -76,10 +67,10 @@ const editSong = async (key, albumKey, explicit) => {
         explicit: explicit,
       },
     });
-    console.log("SUCCESS");
+    return "SUCCESS";
   } catch (error) {
-    console.log(`ERRO: ${error}`);
+    return error.response.data;
   }
 };
 
-export { getSongsService, getSongsByArtist, addSong, editSong };
+export { getSongsService, getSongsByArtist, addSongService, editSongService };

@@ -33,11 +33,10 @@ const deleteItem = async (type, key) => {
         "@key": key,
       },
     });
+    return "SUCCESS"
   } catch (error) {
-    console.log(error);
+    return(error.response.data);
   }
 };
-
-getItensByType("album");
 
 export { baseUrl, getItensByType, deleteItem, getItensResolved };

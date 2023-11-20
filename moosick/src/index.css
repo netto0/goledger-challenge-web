@@ -3,6 +3,7 @@
   --gray1: #d9d9d9;
   --gray2: #a3a3a3;
   --darkGray: #3c3c3c;
+  --darkGrayTransparent: #3d3d3d7a;
   --orange: #ff8a1e;
 
   --defaultBorderRadius: 10px;
@@ -27,6 +28,23 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 html {
   width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--darkGray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border-radius: 3px;
 }

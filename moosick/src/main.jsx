@@ -9,7 +9,7 @@ import HomePage from "./routes/HomePage.jsx";
 import AlbumsPage from "./routes/AlbumsPage.jsx";
 import SongsPage from "./routes/SongsPage.jsx";
 import PlaylistsPage from "./routes/PlaylistsPage.jsx";
-// import { GlobalSettingsProvider } from './providers/globalSettings.jsx';
+import { GlobalSettingsProvider } from "./providers/globalSettings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,5 +26,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <GlobalSettingsProvider>
+    <RouterProvider router={router} />
+  </GlobalSettingsProvider>
 );

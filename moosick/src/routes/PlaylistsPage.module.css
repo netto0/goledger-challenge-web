@@ -1,12 +1,3 @@
 .playlistsPageContainer {
     width: 90%;
 }
-
-ul {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 100%;
-    gap: 10px 15px;
-    width: 100%;
-  }
-  

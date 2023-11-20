@@ -4,6 +4,7 @@
     box-shadow: var(--defaultShadow);
     
     height: 92px;
+    width: 100%;
     position: relative;
     float: left;
     display: flex;
@@ -13,6 +14,8 @@
 
 .artistCard:hover {
     cursor: pointer;
+    scale: 1.01;
+    transition: .2s;
 }
 
 .artistCard h1 {
@@ -51,4 +54,8 @@
 
 .artistCard button:hover {
   cursor: pointer;
+}
+
+.artistInfos {
+  width: 98%;
 }

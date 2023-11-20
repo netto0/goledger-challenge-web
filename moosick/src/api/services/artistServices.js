@@ -7,28 +7,28 @@ const getArtistsService = async () => {
     const response = await getItensByType("artist");
     return response;
   } catch (error) {
-    console.log(`ERROR: ${error}`);
+    return error.response.data
   }
 };
 
 const getArtistName = async (key) => {
   try {
     const response = await axios.post(`${baseUrl}/query/search`, {
-      "query": {
-        "selector": {
+      query: {
+        selector: {
           "@assetType": "artist",
-          "@key": key
-        }
-      }
-    })
-    console.log(response.data.result[0].name)
-    return response.data.result[0].name
+          "@key": key,
+        },
+      },
+    });
+    console.log(response.data.result[0].name);
+    return response.data.result[0].name;
   } catch (error) {
-    console.log(`ERROR: ${error}`)
+    return error.response.data
   }
-}
+};
 
-const addArtist = async (name, about) => {
+const addArtistService = async (name, about) => {
   try {
     const response = await axios.post(`${baseUrl}/invoke/createAsset`, {
       asset: [
@@ -39,13 +39,13 @@ const addArtist = async (name, about) => {
         },
       ],
     });
-    console.log("SUCCESS");
+    return "SUCCESS";
   } catch (error) {
-    console.log(error.response);
+    return error.response.data;
   }
 };
 
-const editArtist = async (key, about) => {
+const editArtistService = async (key, about) => {
   try {
     const response = await axios.post(`${baseUrl}/invoke/updateAsset`, {
       update: {
@@ -54,12 +54,12 @@ const editArtist = async (key, about) => {
         about: about,
       },
     });
-    console.log("SUCCESS");
+    return "SUCCESS";
   } catch (error) {
-    console.log(error.response.status);
+    return error.response.data;
   }
 };
 
 // getArtists()
 
-export { getArtistsService, getArtistName, addArtist, editArtist };
+export { getArtistsService, getArtistName, addArtistService, editArtistService };

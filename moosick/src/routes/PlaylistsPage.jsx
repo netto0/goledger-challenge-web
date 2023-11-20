@@ -1,54 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./PlaylistsPage.module.css";
-import { getSongsService } from "../api/services/songServices";
-import { getPlaylistsService } from "../api/services/playlistServices";
 import ListTitle from "../components/ListTitle";
 import PlaylistCard from "../components/PlaylistCard";
+import { GlobalSettingsContext } from "../providers/globalSettings";
+import Loading from "../components/Loading";
+import PlaylistModal from "../components/modals/PlaylistModal";
 
 export default function PlaylistsPage() {
-  const [playlists, setPlaylists] = useState([]);
-
-  const getPlaylists = async () => {
-    const response = await getPlaylistsService();
-    setPlaylists(response);
-  };
-
+  const { loading, getPlaylists, playlists, setActiveModal } = React.useContext(
+    GlobalSettingsContext
+  );
   useEffect(() => {
     getPlaylists();
   }, []);
 
-  var docWidth = document.documentElement.offsetWidth;
-
-[].forEach.call(
-  document.querySelectorAll('*'),
-  function(el) {
-    if (el.offsetWidth > docWidth) {
-      console.log(el);
-    }
-  }
-);
-
   return (
     <div className={styles.playlistsPageContainer}>
-      <ListTitle title="playlists" />
-      <ul>
-        {playlists.map((playlist, index) => {
-          const songsNames = [];
-          if (playlist.songs) {
-            playlist.songs.map((song) => {
-              songsNames.push(song.title);
-            });
-          }
+      <ListTitle title="playlists" btnFunction={() => setActiveModal(<PlaylistModal />)}/>
+      {loading ? (
+        <Loading />
+      ) : (
+        <ul>
+          {playlists.map((playlist, index) => {
+            const songsNames = [];
+            if (playlist.songs) {
+              playlist.songs.map((song) => {
+                songsNames.push(song.title);
+              });
+            }
 
-          return (
-            <PlaylistCard
-              name={playlist.name}
-              description={playlist.description}
-              songs={songsNames}
-            />
-          );
-        })}
-      </ul>
+            return (
+              <li key={index}>
+                <PlaylistCard
+                  playlistKey={playlist['@key']}
+                  name={playlist.name}
+                  description={playlist.description}
+                  songs={songsNames}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }

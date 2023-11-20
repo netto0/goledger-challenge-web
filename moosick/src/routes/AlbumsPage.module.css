@@ -1,12 +1,4 @@
 .artistPageContainer {
     width: 90%;
+    padding: 0 10px;
 }
-
-ul {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: 100%;
-    gap: 10px 15px;
-    width: 100%;
-  }
-  

@@ -1,0 +1,125 @@
+.modalContainer {
+  position: absolute;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 10px 15px;
+  margin: auto 0;
+  background-color: var(--gray0);
+  box-shadow: var(--defaultShadow);
+  width: 500px;
+  height: 600px;
+  border-radius: var(--defaultBorderRadius);
+
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 3px;
+  right: 3px;
+
+  color: var(--darkGray);
+  background-color: var(--orange);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 40px;
+
+  border: none;
+}
+
+.closeButton:hover {
+  cursor: pointer;
+}
+
+.modalContent {
+    width: 100%;
+    padding: 0px 15px;
+}
+
+.modalTitle {
+    margin: 10px 0;
+    font-family: "Boogaloo";
+    font-size: 40px;
+    text-align: center;
+}
+
+.modalForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.formLabel {
+    font-size: 20px;
+    margin-bottom: .5rem;
+}
+
+.formInput {
+    border: none;
+    background-color: var(--gray1);
+    border-radius: var(--defaultBorderRadius);
+    height: 50px;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    padding: .5rem .7rem;
+}
+
+.modalForm textarea {
+    height: 200px;
+    resize: none;
+}
+
+.formSelect {
+    border: none;
+    background-color: var(--gray1);
+    border-radius: var(--defaultBorderRadius);
+    height: 50px;
+    margin-bottom: 1rem;
+    font-size: 20px;
+    padding: .5rem .7rem;
+}
+.formSelect:focus {
+    outline: none;
+}
+
+.formInput:focus {
+    outline: none;
+}
+
+.modalForm button:focus {
+    outline: none;
+}
+
+.formInput:read-only {
+    cursor: not-allowed;
+    color: #a3a3a3;
+}
+
+.formInput::placeholder {
+    color: #a3a3a3;
+}
+
+.confirmButton {
+    background-color: var(--orange);
+    border: none;
+    border-radius: var(--defaultBorderRadius);
+    height: 50px;
+    color: var(--gray0);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.confirmButton:hover {
+    cursor: pointer;
+}
